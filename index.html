@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机数生成器</title>
     <style>
-        /* 简单页面样式，美观适配手机/电脑 */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -60,11 +59,14 @@
         button:hover {
             background-color: #359469;
         }
+        /* 🔥 核心修改：结果样式（放大、居中、单独一行） */
         #result {
-            font-size: 20px;
+            font-size: 42px;      /* 字体超大 */
             font-weight: bold;
-            text-align: center;
-            min-height: 30px;
+            text-align: center;   /* 居中 */
+            min-height: 50px;
+            margin-top: 20px;     /* 上方留白，单独一行 */
+            line-height: 1.2;
         }
         .error {
             color: #ff4444;
@@ -79,30 +81,27 @@
     <div class="container">
         <input type="number" id="maxNum" placeholder="请输入最大数字 N">
         <button onclick="generateRandomNum()">生成随机数</button>
+        <!-- 结果自动单独一行居中显示 -->
         <div id="result"></div>
     </div>
 
     <script>
-        // 核心：生成1~max之间的随机数
         function generateRandomNum() {
-            // 获取输入框的值
             const max = document.getElementById('maxNum').value;
             const resultDom = document.getElementById('result');
 
-            // 输入校验：必须是大于0的整数
             if (!max || isNaN(max) || max < 1 || !Number.isInteger(Number(max))) {
                 resultDom.className = 'error';
                 resultDom.textContent = '请输入有效的正整数！';
                 return;
             }
 
-            // 生成随机数公式：1 ~ max 的整数
             const random = Math.floor(Math.random() * Number(max)) + 1;
-            
-            // 显示结果
             resultDom.className = 'success';
-            resultDom.textContent = `1 ~ ${max} 之间的随机数：${random}`;
+            resultDom.textContent = random; // 只显示数字，更简洁醒目
         }
     </script>
+</body>
+</script>
 </body>
 </html>
